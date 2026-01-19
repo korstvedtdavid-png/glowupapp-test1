@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="no" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlowUp World</title>
+  <meta name="description" content="A positive glow-up forum: TikTok + Twitter vibes, no judgement—only help." />
+
+  <link rel="icon" href="favicon.ico" />
+  <link rel="manifest" href="manifest.json" />
+
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <a class="brand" href="./index.html">
+      <span class="brand-dot"></span>
+      <span class="brand-name">GlowUp World</span>
+    </a>
+
+    <div class="top-actions">
+      <div class="search-wrap">
+        <input id="searchInput" class="search" placeholder="Search: facial, money, social..." />
+      </div>
+
+      <button id="themeBtn" class="icon-btn" type="button" aria-label="Bytt tema">🌙</button>
+      <button id="settingsBtn" class="icon-btn" type="button" aria-label="Settings">⚙️</button>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="app">
+    <!-- TABS -->
+    <section class="tabs container">
+      <button class="tab active" data-tab="feed">Feed</button>
+      <button class="tab" data-tab="forum">Forum</button>
+      <button class="tab" data-tab="courses">Courses</button>
+      <button class="tab" data-tab="solo">Solo AI</button>
+    </section>
+
+    <!-- FILTERS -->
+    <section class="filters container" id="filters">
+      <div class="chip-row">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="facial">Facial</button>
+        <button class="chip" data-filter="body">Body</button>
+        <button class="chip" data-filter="money">Money</button>
+        <button class="chip" data-filter="social">Social</button>
+        <button class="chip" data-filter="school">School</button>
+      </div>
+
+      <div class="mini-row">
+        <button id="postTextBtn" class="btn btn-secondary" type="button">Post text</button>
+        <button id="postVideoBtn" class="btn btn-primary" type="button">Post video</button>
+        <button id="verifyBtn" class="btn btn-ghost" type="button">Get Verified</button>
+      </div>
+
+      <p class="hint" id="verifiedHint"></p>
+    </section>
+
+    <!-- PANELS -->
+    <section class="panel container" id="panelFeed">
+      <div class="panel-head">
+        <h2>For You</h2>
+        <p>Brutal honesty. Zero cruelty. Only growth.</p>
+      </div>
+
+      <div class="feed" id="feed"></div>
+    </section>
+
+    <section class="panel container hidden" id="panelForum">
+      <div class="panel-head">
+        <h2>Forum</h2>
+        <p>Ask. Answer. Build people up.</p>
+      </div>
+
+      <div class="forum" id="forum"></div>
+    </section>
+
+    <section class="panel container hidden" id="panelCourses">
+      <div class="panel-head">
+        <h2>Courses</h2>
+        <p>Verified creators. Clean value. No scams.</p>
+      </div>
+
+      <div class="courses" id="courses"></div>
+    </section>
+
+    <section class="panel container hidden" id="panelSolo">
+      <div class="panel-head">
+        <h2>Solo AI</h2>
+        <p>Private mode. No people. Just you + growth.</p>
+      </div>
+
+      <div class="solo">
+        <div class="ai-card">
+          <h3>Your AI Buddy</h3>
+          <p class="muted">
+            Dette er en demo. I ekte app: “Duolingo-vibe” buddy som gir deg daglige challenges og plan.
+          </p>
+
+          <div class="ai-chat" id="aiChat">
+            <div class="ai-msg ai">👋 Yo. Hva vil du improve i dag?</div>
+          </div>
+
+          <div class="ai-input">
+            <input id="aiInput" placeholder="Skriv f.eks: ‘gi meg en social plan’" />
+            <button id="aiSend" class="btn btn-primary" type="button">Send</button>
+          </div>
+        </div>
+
+        <div class="ai-card">
+          <h3>Quick Plans</h3>
+          <div class="quick-grid">
+            <button class="quick" data-q="facial">Facial plan</button>
+            <button class="quick" data-q="body">Body plan</button>
+            <button class="quick" data-q="social">Social plan</button>
+            <button class="quick" data-q="money">Money plan</button>
+            <button class="quick" data-q="school">School plan</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- BOTTOM NAV (mobile vibe) -->
+  <nav class="bottom-nav">
+    <a class="nav-item active" data-tablink="feed" href="#">🏠<span>Feed</span></a>
+    <a class="nav-item" data-tablink="forum" href="#">💬<span>Forum</span></a>
+    <a class="nav-item" data-tablink="courses" href="#">🎓<span>Courses</span></a>
+    <a class="nav-item" data-tablink="solo" href="#">🤖<span>Solo</span></a>
+  </nav>
+
+  <!-- MODALS -->
+  <div class="modal hidden" id="modalText">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>Post text</h3>
+        <button class="icon-btn" id="closeText">✖</button>
+      </div>
+
+      <label class="label">
+        Title
+        <input id="textTitle" placeholder="Ex: How do I improve social confidence?" />
+      </label>
+
+      <label class="label">
+        Category
+        <select id="textCategory">
+          <option value="facial">Facial</option>
+          <option value="body">Body</option>
+          <option value="money">Money</option>
+          <option value="social">Social</option>
+          <option value="school">School</option>
+        </select>
+      </label>
+
+      <label class="label">
+        Post
+        <textarea id="textBody" rows="5" placeholder="Write it honest. Keep it respectful."></textarea>
+      </label>
+
+      <button id="submitText" class="btn btn-primary" type="button">Publish</button>
+      <p class="hint muted small">AI moderation demo: hateful/mean phrases gets blocked.</p>
+      <p id="textStatus" class="status"></p>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="modalSettings">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>Settings</h3>
+        <button class="icon-btn" id="closeSettings">✖</button>
+      </div>
+
+      <div class="setting-row">
+        <div>
+          <strong>Video posting</strong>
+          <p class="muted small">Requires Verified ID (demo toggles in localStorage)</p>
+        </div>
+        <button id="toggleVerified" class="btn btn-secondary" type="button">Toggle Verified</button>
+      </div>
+
+      <div class="setting-row">
+        <div>
+          <strong>Category Preferences</strong>
+          <p class="muted small">Choose what you want to see most.</p>
+        </div>
+        <button id="resetPrefs" class="btn btn-ghost" type="button">Reset</button>
+      </div>
+
+      <div class="chip-row" id="prefChips">
+        <button class="chip pref" data-pref="facial">Facial</button>
+        <button class="chip pref" data-pref="body">Body</button>
+        <button class="chip pref" data-pref="money">Money</button>
+        <button class="chip pref" data-pref="social">Social</button>
+        <button class="chip pref" data-pref="school">School</button>
+      </div>
+
+      <p class="muted small">Tip: Dette påvirker sortering i feed (demo).</p>
+    </div>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/scroll.js"></script>
+  <script src="js/forms.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
